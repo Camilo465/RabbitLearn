@@ -32,3 +32,4 @@ C:\Users\lucas\source\reposvscode\LearnRabbitMQ\obj\Debug\net8.0\LearnRabbitMQ.g
 C:\Users\lucas\source\reposvscode\LearnRabbitMQ\obj\Debug\net8.0\ref\LearnRabbitMQ.dll
 C:\Users\lucas\source\reposvscode\LearnRabbitMQ\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\lucas\source\reposvscode\LearnRabbitMQ\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Users\lucas\source\reposvscode\LearnRabbitMQ\obj\Debug\net8.0\LearnRabbitMQ.sourcelink.json

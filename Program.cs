@@ -1,4 +1,3 @@
-using Consumer;
 using Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,10 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IMassageBusService, RabbitMqService>();
-builder.Services.AddScoped<IRabbitMqConsumer, RabbitMqConsumer>();
-
 builder.Services.SeedRabbitMQConfiguration(builder.Configuration);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

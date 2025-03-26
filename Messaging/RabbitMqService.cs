@@ -7,7 +7,7 @@ namespace Messaging;
 
 public class RabbitMqService : IMassageBusService
 {
-    public void Publish(WeatherForecast[] weatherForecast)
+    public async Task Publish(WeatherForecast[] weatherForecast)
     {
         var factory = new ConnectionFactory()
         {
@@ -16,9 +16,9 @@ public class RabbitMqService : IMassageBusService
             Password = RabbitMQConfiguration.Password
         };
 
-        using var connection = factory.CreateConnection();
+        using var connection = await Task.Run(() => factory.CreateConnection());
+        using var channel = await Task.Run(() => connection.CreateModel());
 
-        using var channel = connection.CreateModel();
         channel.QueueDeclare(queue: "test_queue",
                              durable: false,
                              exclusive: false,
@@ -28,11 +28,11 @@ public class RabbitMqService : IMassageBusService
         string logContent = JsonConvert.SerializeObject(weatherForecast);
         var body = Encoding.UTF8.GetBytes(logContent);
 
-        channel.BasicPublish(exchange: "",
-                                routingKey: "test_queue",
-                                basicProperties: null,
-                                body: body);
+        await Task.Run(() => channel.BasicPublish(exchange: "",
+                                                  routingKey: "test_queue",
+                                                  basicProperties: null,
+                                                  body: body));
 
-        Console.WriteLine($"[X] Enviada: {logContent}");
+        Console.WriteLine($"Enviada: {logContent}");
     }
 }
